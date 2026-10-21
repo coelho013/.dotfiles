@@ -1,12 +1,12 @@
 # .dotfiles
 
-Meus dotfiles, gerenciados com [GNU Stow](https://www.gnu.org/software/stow/)
-e [Homebrew](https://brew.sh).
+My dotfiles, managed with [GNU Stow](https://www.gnu.org/software/stow/)
+and [Homebrew](https://brew.sh).
 
-## Estrutura
+## Structure
 
-Cada pasta de primeiro nível é um *pacote* do stow, espelhando o caminho a
-partir de `$HOME`:
+Each top-level folder is a stow *package*, mirroring the path relative to
+`$HOME`:
 
 ```
 .dotfiles/
@@ -14,41 +14,41 @@ partir de `$HOME`:
 ├── git/.gitconfig              -> ~/.gitconfig
 ├── tmux/.tmux.conf             -> ~/.tmux.conf
 ├── nvim/.config/nvim/          -> ~/.config/nvim
-├── ai-memory/install.sh        instala/configura o ai-memory
-├── Brewfile                    pacotes do Homebrew
-└── install.sh                  bootstrap completo
+├── ai-memory/install.sh        installs/configures ai-memory
+├── Brewfile                    Homebrew packages
+└── install.sh                  full bootstrap
 ```
 
-## Instalação
+## Installation
 
 ```sh
 git clone git@github.com:coelho013/.dotfiles.git ~/.dotfiles
 ~/.dotfiles/install.sh
 ```
 
-O `install.sh`:
+`install.sh`:
 
-1. instala o Homebrew (se faltar) e roda `brew bundle`;
-2. cria os symlinks com `stow` — arquivos reais que conflitem vão para
-   `~/.dotfiles-backup/<data>/`;
-3. roda `ai-memory/install.sh`.
+1. installs Homebrew (if missing) and runs `brew bundle`;
+2. creates the symlinks with `stow` — conflicting real files are moved to
+   `~/.dotfiles-backup/<date>/`;
+3. runs `ai-memory/install.sh`.
 
-## Uso no dia a dia
+## Day-to-day usage
 
 ```sh
-# (re)linkar um pacote
+# (re)link a package
 stow -d ~/.dotfiles -t ~ -R nvim
 
-# remover os links de um pacote
+# remove a package's links
 stow -d ~/.dotfiles -t ~ -D tmux
 
-# atualizar o Brewfile com o que está instalado
+# update the Brewfile with what is currently installed
 brew bundle dump --file ~/.dotfiles/Brewfile --force --brews --taps
 
-# atualizar o ai-memory para a última release
+# update ai-memory to the latest release
 ~/.dotfiles/ai-memory/install.sh --update
 ```
 
-Para adicionar um novo app, crie `<app>/` com o caminho relativo a `$HOME`
-(ex: `alacritty/.config/alacritty/alacritty.toml`) e inclua-o em `PACKAGES`
-no `install.sh`.
+To add a new app, create `<app>/` with the path relative to `$HOME`
+(e.g. `alacritty/.config/alacritty/alacritty.toml`) and add it to `PACKAGES`
+in `install.sh`.
