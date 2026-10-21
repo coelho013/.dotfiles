@@ -8,6 +8,15 @@ for brew_path in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.lin
   fi
 done
 
+# ── PATH ─────────────────────────────────────────────────
+typeset -U path    # remove duplicatas automaticamente
+path=(
+  "$HOME/.local/bin"
+  "$HOME/.cargo/bin"
+  "$HOME/go/bin"
+  $path
+)
+
 # ── Histórico ────────────────────────────────────────────
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
