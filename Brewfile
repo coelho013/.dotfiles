@@ -10,6 +10,10 @@ brew "stow"                       # gerencia os symlinks dos pacotes
 brew "neovim"
 brew "tmux"
 brew "lazygit"
+brew "node"
+brew "tree-sitter-cli"
+brew "ripgrep"
+brew "jdtls"                      # LSP do Java (traz o JDK 21+ que ele precisa)
 
 # ── Zsh ──────────────────────────────────────────────────
 brew "zsh-autosuggestions"
@@ -17,3 +21,11 @@ brew "zsh-syntax-highlighting"
 
 # ── AI ───────────────────────────────────────────────────
 brew "akitaonrails/tap/ai-jail"   # sandbox para agentes de IA
+
+# ── Essentials ───────────────────────────────────────────────────
+brew "unzip"
+
+# ── Fontes ───────────────────────────────────────────────
+# Nerd Font para o ícone de git do prompt. Casks só existem no macOS;
+# no WSL a fonte é instalada no Windows (veja o README).
+cask "font-jetbrains-mono-nerd-font" if OS.mac?

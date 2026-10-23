@@ -9,6 +9,14 @@ PACKAGES=(zsh git tmux nvim)
 BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
 # ── Homebrew ─────────────────────────────────────────────
+case "$(uname -s)" in
+  # zsh e git vêm do sistema (o zsh precisa estar em /etc/shells para virar shell padrão)
+  Linux)  sudo apt install -y build-essential zsh git ;;
+  # no macOS o zsh já é o shell padrão e o git vem com as Command Line Tools
+  Darwin) xcode-select -p >/dev/null 2>&1 || xcode-select --install ;;
+esac
+echo "==> build-essential, zsh e git instalados"
+
 load_brew() {
   local p
   for p in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
@@ -68,3 +76,4 @@ done
 "$DOTFILES/ai-memory/install.sh"
 
 echo "==> Pronto. Abra um novo shell (exec zsh)."
+

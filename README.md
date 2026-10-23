@@ -33,6 +33,14 @@ git clone git@github.com:coelho013/.dotfiles.git ~/.dotfiles
    `~/.dotfiles-backup/<date>/`;
 3. runs `ai-memory/install.sh`.
 
+### Nerd Font
+
+The zsh prompt uses a Nerd Font icon for the git branch. On macOS the
+Brewfile installs JetBrains Mono Nerd Font. On WSL the font must be installed
+on Windows (download from <https://www.nerdfonts.com/font-downloads>) and
+selected in the Windows Terminal profile; otherwise set `GIT_SYMBOL=''` in
+`.zshrc`.
+
 ## Day-to-day usage
 
 ```sh

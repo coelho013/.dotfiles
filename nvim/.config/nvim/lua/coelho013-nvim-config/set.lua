@@ -8,3 +8,9 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 
 vim.o.timeoutlen = 10000
+
+-- desde o 0.11 o virtual_text vem desligado, entao os erros so apareciam na coluna lateral
+vim.diagnostic.config({
+  virtual_text = true,
+  severity_sort = true,
+})

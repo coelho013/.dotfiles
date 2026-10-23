@@ -17,6 +17,8 @@ path=(
   $path
 )
 
+export CSTEST_DIR="/mnt/c/plugins/cstest-nvim"
+
 # ── Histórico ────────────────────────────────────────────
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
