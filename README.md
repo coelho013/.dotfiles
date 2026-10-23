@@ -28,10 +28,14 @@ git clone git@github.com:coelho013/.dotfiles.git ~/.dotfiles
 
 `install.sh`:
 
-1. installs Homebrew (if missing) and runs `brew bundle`;
-2. creates the symlinks with `stow` — conflicting real files are moved to
+1. installs the system prerequisites (`build-essential`, `zsh`, `git` via apt
+   on Linux; Command Line Tools on macOS);
+2. installs Homebrew (if missing) and runs `brew bundle`;
+3. creates the symlinks with `stow` — conflicting real files are moved to
    `~/.dotfiles-backup/<date>/`;
-3. runs `ai-memory/install.sh`.
+4. runs `ai-memory/install.sh`.
+
+No system Ruby is needed: Homebrew ships its own Ruby to read the Brewfile.
 
 ### Nerd Font
 
@@ -40,6 +44,67 @@ Brewfile installs JetBrains Mono Nerd Font. On WSL the font must be installed
 on Windows (download from <https://www.nerdfonts.com/font-downloads>) and
 selected in the Windows Terminal profile; otherwise set `GIT_SYMBOL=''` in
 `.zshrc`.
+
+## Tools
+
+Top-level entries are the tools I actually use; nested entries are only
+there so their parent works.
+
+```
+BOOTSTRAP (install.sh)
+├── apt: build-essential, zsh, git       Linux (macOS: Command Line Tools)
+├── Homebrew                             installs the Brewfile
+│   └── curl                             downloads the installer
+└── stow                                 symlinks the packages
+
+zsh                                      no framework
+├── zsh-autosuggestions                  brew
+├── zsh-syntax-highlighting              brew
+├── git                                  prompt reads `git status`
+└── Nerd Font                            prompt git icon (cask on macOS)
+
+tmux                                     prefix C-Space, no plugins
+
+git                                      .gitconfig with user/email
+
+lazygit                                  git TUI
+
+Neovim
+├── lazy.nvim                            plugin manager
+│   └── git                              clones lazy and the plugins
+├── telescope.nvim                       fuzzy finder
+│   ├── plenary.nvim
+│   └── ripgrep                          live_grep / grep_string
+├── nvim-treesitter                      syntax highlighting
+│   ├── tree-sitter-cli                  builds the parsers
+│   └── build-essential                  C compiler for the parsers
+├── blink.cmp                            completion (prebuilt binary)
+├── nvim-jdtls                           Java
+│   ├── jdtls                            brew; pulls openjdk and python
+│   ├── blink.cmp                        LSP capabilities
+│   ├── lombok-nightly                   optional, :MasonInstall
+│   └── JDKs 8/17/21 in /usr/lib/jvm     project runtimes, installed outside
+├── mason.nvim                           LSP/tool installer (only lombok today)
+│   └── unzip                            extracts packages
+├── lazygit.nvim                         <leader>gg
+│   ├── lazygit
+│   └── plenary.nvim
+├── lualine.nvim                         statusline/tabline
+├── mini.files                           file explorer, <leader>e
+├── catppuccin                           theme (mocha)
+├── indent-blankline.nvim                indent guides
+├── ultimate-autopair.nvim               auto-close pairs
+└── cstest.nvim                          local, only if $CSTEST_DIR exists
+
+ai-memory                                memory for AI agents (curl installer)
+└── curl, systemd --user
+
+ai-jail                                  sandbox for AI agents
+└── tap akitaonrails/tap
+
+ORPHAN
+└── node                                 nothing uses it yet
+```
 
 ## Day-to-day usage
 
